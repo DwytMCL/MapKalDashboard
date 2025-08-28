@@ -1,0 +1,136 @@
+/*
+    src/index.css
+*/
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+html, body {
+  @apply nice-scrollbar;
+  scrollbar-gutter: stable both-edges;
+}
+@layer base {
+  body {
+    @apply font-sans;
+  }
+  html { 
+    scroll-behavior: smooth; 
+  }
+  .scroll-area {
+    -webkit-overflow-scrolling: touch;
+  }
+  
+}
+
+{/* Components */}
+@layer components {
+  .card {
+      @apply rounded-md sm:rounded-lg border shadow-sm p-2 sm:p-4 transition-colors;
+      @apply border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800;
+    }
+  .input {
+      @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm;
+    }
+  .btn-primary {
+      @apply rounded-md bg-blue-600 px-3 py-1.5 text-sm text-white hover:bg-blue-700;
+    }
+  .btn-secondary {
+      @apply rounded-md bg-gray-200 px-3 py-1.5 text-sm text-gray-800 hover:bg-gray-300;
+    }
+  .btn-danger {
+      @apply rounded-md bg-red-500 px-3 py-1.5 text-sm text-white hover:bg-red-600;
+    }
+  .glass {
+      @apply bg-white/30 dark:bg-gray-800/30 backdrop-blur-md border border-white/20 dark:border-gray-700/30 shadow-lg;
+    }
+  .glass-gradient {
+      background: linear-gradient(
+        135deg,rgba(255,255,255,0.25) 0%,rgba(255,255,255,0.05) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+    }
+  .glass-gradient-budget {
+      background: linear-gradient(
+        135deg,rgba(255,255,255,0.25) 0%,rgba(255,255,255,0.05) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+  .glass-gradient-header {
+      background: linear-gradient(
+        135deg,rgba(255,255,255,0.25) 0%,rgba(255,255,255,0.05) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 0;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+    }
+
+  .glass-btn {
+      @apply text-gray-800 dark:text-white;
+      background: linear-gradient(
+          135deg,
+        rgba(255, 255, 255, 0.25) 0%,
+        rgba(255, 255, 255, 0.05) 100%
+        );
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      transition: all 0.2s ease-in-out;
+    }
+  .glass-btn:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.15) 100%
+      );
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+  }
+  .glass-btn:active {
+      transform: scale(0.97);
+    }
+  .glass-btn-primary {
+      @apply glass-btn text-blue-700 dark:text-blue-300;
+    }
+  .glass-btn-danger {
+      @apply glass-btn text-red-600 dark:text-red-400;
+    }
+
+  @layer utilities {
+  .nice-scrollbar {
+      scrollbar-width: auto;
+      scrollbar-color: rgba(100,116,139,0.5) transparent; /* slate-500 */
+    }
+  .nice-scrollbar::-webkit-scrollbar {
+      width: 8px; height: 8px;
+    }
+  .nice-scrollbar::-webkit-scrollbar-thumb {
+      background-color: rgba(100,116,139,0.5);
+      border-radius: 9999px;
+    }
+  .ring-focus {
+      @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500;
+    }
+  .hover-lift {
+      transition: transform 120ms ease, box-shadow 120ms ease;
+    }
+  .hover-lift:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    }
+  }
+  
+}
