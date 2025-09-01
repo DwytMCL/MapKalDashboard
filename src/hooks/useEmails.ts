@@ -1,5 +1,5 @@
 // src/hooks/useEmails.ts
-import { useEffect, useMemo, useState, useCallback } from "react";
+import { useEffect, useState, useCallback } from "react";
 import {
   collection,
   onSnapshot,
@@ -19,7 +19,7 @@ export type Email = {
   senderEmail: string;
   subject: string;
   message: string;
-  date: string | Timestamp;
+  date: Timestamp | null;
 };
 
 export function useEmails() {
@@ -37,7 +37,8 @@ export function useEmails() {
           senderEmail: v.senderEmail ?? "",
           subject: v.subject ?? "",
           message: v.message ?? "",
-          date: v.date ?? serverTimestamp(),
+          // Ensure we never put a FieldValue into state
+          date: v.date instanceof Timestamp ? (v.date as Timestamp) : null,
         } as Email;
       });
       setEmails(data);
@@ -48,7 +49,7 @@ export function useEmails() {
   }, []);
 
   const add = useCallback(
-    async (e: Omit<Email, "id" | "date"> & { date?: string | Timestamp }) => {
+    async (e: Omit<Email, "id" | "date"> & { date?: Timestamp }) => {
       await addDoc(collection(firestoreDB, "emails"), {
         sender: e.sender,
         senderEmail: e.senderEmail,

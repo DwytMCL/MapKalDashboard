@@ -4,13 +4,14 @@ import { format } from "date-fns";
 import { Email, useEmails } from "../hooks/useEmails";
 import { Timestamp } from "firebase/firestore";
 
-function formatDate(value: string | Timestamp) {
+function formatDate(value: Timestamp | string | null | undefined) {
+  if (!value) return "";
   if (typeof value === "string") return value;
   if (value instanceof Timestamp) return format(value.toDate(), "PPp");
   try {
     return format(new Date(value as any), "PPp");
   } catch {
-    return String(value);
+    return "";
   }
 }
 
@@ -37,7 +38,7 @@ export default function GmailPanel() {
       >
         Gmail
         <span className="ml-2 text-gray-500 dark:text-gray-400 text-xs sm:text-sm">
-          {isOpen ? "▲" : "▼"}
+          {isOpen ? "v" : ">"}
         </span>
       </h2>
 
@@ -53,14 +54,14 @@ export default function GmailPanel() {
               <input
                 value={term}
                 onChange={(e) => setTerm(e.target.value)}
-                placeholder="Search mail…"
+                placeholder="Search mail..."
                 className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-800 outline-none ring-0 placeholder:text-gray-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100 dark:placeholder:text-gray-500"
               />
             </div>
             <div className="flex-1 overflow-auto">
               {loading ? (
                 <div className="p-4 text-sm text-gray-500 dark:text-gray-400">
-                  Loading…
+                  Loading...
                 </div>
               ) : filtered.length === 0 ? (
                 <div className="p-4 text-sm text-gray-500 dark:text-gray-400">
@@ -115,7 +116,7 @@ export default function GmailPanel() {
                   {selected
                     ? `${selected.sender || "Unknown"} <${
                         selected.senderEmail
-                      }> • ${formatDate(selected.date)}`
+                      }> - ${formatDate(selected?.date)}`
                     : "Select a message"}
                 </div>
               </div>
@@ -146,3 +147,4 @@ export default function GmailPanel() {
     </div>
   );
 }
+

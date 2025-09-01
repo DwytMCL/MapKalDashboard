@@ -50,7 +50,7 @@ export default function Announcements() {
         >
           Announcements
           <span className="ml-2 text-gray-500 dark:text-gray-400 text-xs sm:text-sm">
-            {isOpen ? '▲' : '▼'}
+            {isOpen ? 'v' : '>'}
           </span>
         </h2>
         <AddAnnouncement postedBy={user?.displayName ?? user?.email ?? 'Anonymous'} />
@@ -68,11 +68,11 @@ export default function Announcements() {
                   <p className="font-medium text-gray-800 dark:text-gray-100 break-words">{a.title}</p>
                   <p className="text-sm text-gray-600 dark:text-gray-300 break-words">{a.description}</p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    {a.postedBy} – {new Date(a.date).toLocaleDateString()}
+                    {a.postedBy} - {new Date(a.date).toLocaleDateString()}
                   </p>
                   {a.editedBy && (
                     <p className="text-xs text-gray-400 italic">
-                      Edited by {a.editedBy} – {new Date(a.editedAt!).toLocaleDateString()}
+                      Edited by {a.editedBy} - {new Date(a.editedAt!).toLocaleDateString()}
                     </p>
                   )}
                 </div>
@@ -130,3 +130,4 @@ function AnnouncementForm({
     </div>
   );
 }
+

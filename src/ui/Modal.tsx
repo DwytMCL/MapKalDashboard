@@ -10,7 +10,7 @@ type Props = {
 };
 const sizes = { sm: "max-w-md", md: "max-w-lg", lg: "max-w-2xl" };
 
-export function Modal({ title, onClose, children, size="md" }: Props) {
+export function Modal({ title, onClose, children, size = "md" }: Props) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
@@ -32,10 +32,13 @@ export function Modal({ title, onClose, children, size="md" }: Props) {
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:hover:text-white"
           aria-label="Close" title="Close"
-        >✕</button>
+        >
+          X
+        </button>
         {children}
       </div>
     </div>
   );
   return createPortal(node, document.body);
 }
+
